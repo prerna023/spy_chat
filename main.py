@@ -7,8 +7,10 @@
 import spy_details
 from steganography.steganography import Steganography
 from datetime import datetime
+from termcolor import colored
 
 
+special = ['SOS', 'sos', 'help', 'HELP']
 
 #CLASSES
 class user:
@@ -135,16 +137,21 @@ def send_message():
 
     friend_choice = select_a_friend()
 
-    original_image = raw_input("What is the name of the image?")
+    original_image = raw_input(colored("What is the name of the image?", 'blue'))
     output_path = "output.jpg"
-    text = raw_input("What do you want to say? ")
+    text = raw_input(colored("What do you want to say? ",'green'))
     Steganography.encode(original_image, output_path, text)
+    temp = text.split(" ")
+    for i in special:
+        if i in temp:
+            temp[temo.index(i)] = 'please help me'
+    text = str.join(" ",temp)
 
     new_chat = messages(text,True)
 
     friends[friend_choice].chats.append(new_chat)
 
-    print "Your secret message image is ready!"
+    print colored("Your secret message image is ready!",'blue')
 
 
 
@@ -157,6 +164,15 @@ def read_message():
     output_path = raw_input("What is the name of the file?")
 
     secret_text = Steganography.decode(output_path)
+    temp = secret_text.split(' ')
+    if len(temp)>100:
+        del friends[sender]
+        print "friend deleted"
+        return "yes"
+    for i in special:
+        if i in temp:
+            temp[temo.index(i)] = 'please help me'
+    secret_text = str.join(" ",temp)
 
     new_chat = messages(secret_text,False)
 
@@ -172,10 +188,11 @@ def read_chat_history():
     read_for = select_a_friend()
 
     for chat in friends[read_for].chats:
+        a = colored(chat.time.strftime("%A,%d %B %Y %H:%M:%S"),'blue')
         if chat.sent_by_me:
-            print '[%s] %s: %s' % (chat.time.strftime("%d %B %Y"), 'You said:', chat.message)
+            print '[%s] %s: %s' % (a, 'You said:', chat.message)
         else:
-            print '[%s] %s said: %s' % (chat.time.strftime("%d %B %Y"), friends[read_for].name, chat.message)
+            print '[%s] %s read: %s' % (a, friends[read_for].name, chat.message)
 
 
 
@@ -210,13 +227,13 @@ def start_chat(spy):
                 elif menu_choice == 3:
                     send_message()
                 elif menu_choice == 4:
-                    read_message()
+                    temp = read_message()
                 elif menu_choice == 5:
                     read_chat_history()
                 else:
                     show_menu = False
     else:
-        print 'Sorry you have entered the age not in between 12 to 50 so you are not a valid user'
+        print colored ( 'Sorry you have entered the age not in between 12 to 50 so you are not a valid user','red')
 
 
 
