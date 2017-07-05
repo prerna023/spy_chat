@@ -219,8 +219,8 @@ def start_chat(spy):
     if USER.age > 12 and USER.age < 50:
 
 
-        print "Authentication complete. Welcome " + USER.name + " age: " \
-              + str(USER.age) + " and rating of: " + str(USER.rating) + " Proud to have you onboard"
+        print colored("Authentication complete. Welcome " + USER.name + " age: " \
+              + str(USER.age) + " and rating of: " + str(USER.rating) + " Proud to have you onboard", 'cyan')
 
         show_menu = True
 
@@ -254,7 +254,7 @@ def start_chat(spy):
 
 
 STATUS_MESSAGES = ['Busy','Working On Spy_Chat' ,'Hey there i am using spy-chat']
-print "Hello! Let\'s get started"
+print colored("Hello! Let\'s get started", 'cyan')
 USER=user('','',0,0.0)
 USER.name=raw_input("Welcome to spy chat,Enter Your Name please:")
 if spy_details.spy_name==USER.name:
@@ -269,7 +269,7 @@ else:
         if USER.salutation.upper() == 'MR.' or USER.salutation.upper() == 'MS.':
             pass
         else:
-            print("Wrong sallutation")
+            print colored("Wrong sallutation",'red')
             exit()
 
         USER.age = raw_input("What is your age?")
@@ -280,4 +280,4 @@ else:
 
         start_chat(USER)
     else:
-        print 'Please add a valid spy name'
+        print colored( 'Please add a valid spy name', 'red')
