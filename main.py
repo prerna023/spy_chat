@@ -164,21 +164,27 @@ def read_message():
     output_path = raw_input("What is the name of the file?")
 
     secret_text = Steganography.decode(output_path)
-    temp = secret_text.split(' ')
-    if len(temp)>100:
-        del friends[sender]
-        print "friend deleted"
-        return "yes"
-    for i in special:
-        if i in temp:
-            temp[temo.index(i)] = 'please help me'
-    secret_text = str.join(" ",temp)
+    secret_text = str(secret_text)
+    if secret_text == 'None':
+        print("No secret message")
+    else:
+        temp = secret_text.split(' ')
+        if len(temp) > 100:
+            del friends[sender]
+            print "friend deleted"
+            return "yes"
+        for i in special:
+            if i in temp:
+                temp[temo.index(i)] = 'please help me'
+        secret_text = str.join(" ", temp)
 
-    new_chat = messages(secret_text,False)
+        new_chat = messages(secret_text, False)
 
-    friends[sender].chats.append(new_chat)
+        friends[sender].chats.append(new_chat)
 
-    print "Your secret message has been saved!"
+        print "Your secret message has been saved!"
+
+
 
 
 
