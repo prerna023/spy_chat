@@ -50,12 +50,12 @@ def add_status():
 
         print 'Your current status message is %s \n' % (USER.current_status_message)
     else:
-        print 'You don\'t have any status message currently \n'
+        print colored('You don\'t have any status message currently \n','red')
 
-    default = raw_input("Do you want to select from the older status (y/n)? ")
+    default = raw_input(colored("Do you want to select from the older status (y/n)? ",'cyan'))
 
     if default.upper() == "N":
-        new_status_message = raw_input("What status message do you want to set? ")
+        new_status_message = raw_input(colored("What status message do you want to set? ",'cyan'))
 
 
         if len(new_status_message) > 0:
@@ -75,6 +75,7 @@ def add_status():
 
 
         if len(STATUS_MESSAGES) >= message_selection:
+
             updated_status_message = STATUS_MESSAGES[message_selection - 1]
 
     else:
@@ -83,7 +84,7 @@ def add_status():
     if updated_status_message:
         print 'Your updated status message is: %s' % (updated_status_message)
     else:
-        print 'You current don\'t have a status update'
+        print colored('You current don\'t have a status update','red')
 
     return updated_status_message
 
@@ -96,6 +97,11 @@ def add_friend():
 
     new_friend.name = raw_input("Please add your friend's name: ")
     new_friend.salutation = raw_input("Are they Mr. or Ms.?: ")
+    if new_friend.salutation.upper() == 'MR.' or new_friend.salutation.upper() == 'MS.':
+        pass
+    else:
+        print("Wrong sallutation")
+        return add_friend()
 
     new_friend.name = new_friend.salutation + " " + new_friend.name
 
@@ -107,9 +113,9 @@ def add_friend():
 
     if len(new_friend.name) > 0 and new_friend.age > 12:
         friends.append(new_friend)
-        print 'Friend Added!'
+        print colored( 'Friend Added!', 'cyan')
     else:
-        print 'Sorry! Invalid entry. We can\'t add spy with the details you provided'
+        print colored( 'Sorry! Invalid entry. We can\'t add spy with the details you provided', 'red')
 
     return len(friends)
 
@@ -182,7 +188,7 @@ def read_message():
 
         friends[sender].chats.append(new_chat)
 
-        print "Your secret message has been saved!"
+        print colored("Your secret message has been saved!" , 'green')
 
 
 
@@ -260,6 +266,11 @@ else:
 
     if len(USER.name) > 0 and USER.name.isalpha():
         USER.salutation = raw_input("Should I call you Mr. or Ms.?: ")
+        if USER.salutation.upper() == 'MR.' or USER.salutation.upper() == 'MS.':
+            pass
+        else:
+            print("Wrong sallutation")
+            exit()
 
         USER.age = raw_input("What is your age?")
         USER.age = int(USER.age)
