@@ -79,7 +79,7 @@ def add_status():
             updated_status_message = STATUS_MESSAGES[message_selection - 1]
 
     else:
-        print 'The option you chose is not valid! Press either y or n.'
+        print colored('The option you chose is not valid! Press either y or n.', 'red')
 
     if updated_status_message:
         print 'Your updated status message is: %s' % (updated_status_message)
@@ -100,7 +100,7 @@ def add_friend():
     if new_friend.salutation.upper() == 'MR.' or new_friend.salutation.upper() == 'MS.':
         pass
     else:
-        print("Wrong sallutation")
+        print(colored("Wrong sallutation", 'red'))
         return add_friend()
 
     new_friend.name = new_friend.salutation + " " + new_friend.name
@@ -172,12 +172,12 @@ def read_message():
     secret_text = Steganography.decode(output_path)
     secret_text = str(secret_text)
     if secret_text == 'None':
-        print("No secret message")
+        print(colored("No secret message",'red'))
     else:
         temp = secret_text.split(' ')
         if len(temp) > 100:
             del friends[sender]
-            print "friend deleted"
+            print colored("friend deleted", cyan)
             return "yes"
         for i in special:
             if i in temp:
