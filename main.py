@@ -41,6 +41,9 @@ friend_three = user('Kajal', 'Ms.', 19, 8)
 friends = [friend_one, friend_two, friend_three]       #LIST OF FRIENDS
 
 
+
+
+
 # ADD STATUS FUNCTION
 def add_status():
 
